@@ -1,5 +1,16 @@
+# CHECKPOINT: Not working yet
+# - [Use PAT as token](https://github.com/JuliaRegistries/TagBot#personal-access-tokens-pats)
+# - This script seems not yet correctly being set up. See [Setup](https://github.com/JuliaRegistries/TagBot#setup).
+# - It seems TagBot should work on branch "release" pushed.
+# - You should take how your SWCForecast packages organized into consideration for decide on when TagBot should work.
+
 name: TagBot
 on:
+  # push:
+  #   paths:
+  #     - Project.toml
+  #   branches:
+  #     - master
   issue_comment:
     types:
       - created
@@ -12,4 +23,4 @@ jobs:
       - uses: JuliaRegistries/TagBot@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          ssh: ${{ secrets.DOCUMENTER_KEY }}
+          # ssh: ${{ secrets.DOCUMENTER_KEY }}

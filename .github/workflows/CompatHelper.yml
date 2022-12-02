@@ -1,3 +1,4 @@
+# CompatHelper works but annoying. Currently I use CompatHelperLocal instead
 name: CompatHelper
 on:
   schedule:
