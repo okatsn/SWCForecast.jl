@@ -84,11 +84,13 @@ using ShiftedArrays
 
     @test all(validateshift)
 
-    validatexymatch = [
-        isequal(Matrix(hcat(X1[:, Regex("t-$i")], ShiftedArrays.lag(y1[:, "y_t0"], i))[i+1:end, :]),
-                Matrix(df[7:end-i,:])
-        ) for i in 1:6
-        ]
+    getshifty(i) = ShiftedArrays.lag(y1[:, "y_t0"], i) |> Vector # If shifted array is not converted to array, stack overflow error will occur in hcat
+
+    # Check if the two matrices are equal
+    validatexymatch = [isequal(
+            Matrix(hcat(X1[:, Regex("t-$i")], getshifty(i))[i+1:end, :]),
+            Matrix(df[7:end-i,:])
+        ) for i in 1:6]
     @test all(validatexymatch)
 
 
