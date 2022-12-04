@@ -41,7 +41,7 @@ TestItems = "1c621080-faea-4a02-84b6-bbd5e436b8fe"
 
 [compat]
 CSV = "0.10.7"
-CairoMakie = "0.9.3"
+CairoMakie = "0.9.3, 0.10"
 CategoricalArrays = "0.10.7"
 Chain = "0.5.0"
 ColorSchemes = "3.20.0"
