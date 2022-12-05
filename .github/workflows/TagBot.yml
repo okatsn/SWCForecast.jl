@@ -10,10 +10,11 @@ name: TagBot
 on:
   push:
     paths:
-      - 'Project.toml'
+      - '/docs/src/log/index.md'
     branches:
-      - master
       - main
+      - master
+
   issue_comment:
     types:
       - created
