@@ -1,4 +1,5 @@
-using Test, TestItems
+using Test
+# using TestItems
 using SWCForecast
 
 function targetlist(targetexpr::Regex, dir2walk::AbstractString)
@@ -27,8 +28,8 @@ end
 end
 
 
-@testitem "test vscode testitem" begin
-    println("Only `@testitem` block will be detectable by vscode's test")
-    @test true
-    # See https://youtu.be/Okn_HKihWn8?t=1299
-end
+# @testitem "test vscode testitem" begin
+#     println("Only `@testitem` block will be detectable by vscode's test")
+#     @test true
+#     # See https://youtu.be/Okn_HKihWn8?t=1299
+# end
