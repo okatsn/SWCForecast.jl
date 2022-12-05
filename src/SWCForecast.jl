@@ -3,7 +3,7 @@ module SWCForecast
 using Dates
 
 using DataFrames
-using DrWatson
+
 using MLJ
 using DecisionTree: DecisionTree
 
@@ -11,12 +11,6 @@ using RecipesBase
 using NetworkLayout
 
 include("project_setup.jl")
-export notebooksdir
-export externaldatadir, rawdatadir, interimdatadir, finaldatadir
-export outputdir, featuresdir, modelsdir, reportsdir, figuresdir, testdatadir
-export projectdir, datadir, srcdir, scriptsdir  # reexport DrWatson
-export trainingdir
-export mdtemplatedir
 export AFile, AFolder
 
 include("myreport/infostructs.jl");

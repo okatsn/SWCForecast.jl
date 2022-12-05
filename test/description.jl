@@ -71,6 +71,7 @@ end
         "Level1b" => Dict("Level2bb"=>"World", "Level2ba"=>"Hello")
     )
 
+    projectdir(args...) = joinpath(@__DIR__, args...)
     DDT = DescriptOneTree(projectdir, d0)
     description!(DDT, d1)
     @test isequal(DDT.description, d_01)
