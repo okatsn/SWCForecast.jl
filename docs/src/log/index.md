@@ -1,3 +1,7 @@
+```@meta
+CurrentModule = SWCForecast
+```
+
 # Changelog
 
 2022-12-02 v0.1.2
@@ -6,3 +10,6 @@
 
 2022-12-05 v0.1.3
 - Changelog
+
+```@index
+```
