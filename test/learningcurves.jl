@@ -1,9 +1,20 @@
 using DataFrames
-using OkMLModels
 using SWCForecast
 using MLJ
 using Random
 @testset "Test `getindex(LC::LearningCurves)`" begin
+    function fstree()
+        selector = FeatureSelector()
+
+        treemodel = (@load "DecisionTreeRegressor" pkg = "DecisionTree" verbosity = 0)() # regressor type
+
+        mypipe = Pipeline(
+            selector = selector,
+            tree = treemodel
+        )
+
+        return mypipe
+    end
     resampler = CV(;nfolds=6);
     rangex = 1:9
     rangey = 1:3
