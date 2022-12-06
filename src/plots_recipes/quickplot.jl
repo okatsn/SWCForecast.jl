@@ -6,7 +6,7 @@ function quickdataoverview(df_all::DataFrame; gridwidth=Month(1), xname=:datetim
     whichinterval = let
         ext0, ext1 = extrema(df_all[!, xname])
         dtgrid = range(ext0, ext1, step=gridwidth) |> collect # datetime grid for rectbin plot
-        dft = DataFrame([ShiftedArrays.lag(dtgrid) dtgrid], [:dt0, :dt1]) |> dropmissing
+        dft = DataFrame([lag(dtgrid) dtgrid], [:dt0, :dt1]) |> dropmissing
         append!(dft, DataFrame(:dt0 => dft.dt1[end], :dt1 => ext1))
 
         transform!(dft, [:dt0, :dt1] => ByRow((dt0, dt1) -> floor(mean(dt0, dt1), Day)) => :groupname) # See SWCForecast datenum.jl Statistics.mean(dt0, dt1)
@@ -24,7 +24,7 @@ function quickdataoverview(df_all::DataFrame; gridwidth=Month(1), xname=:datetim
     dftemp = @chain df_all begin
         DataFrames.transform(
             Symbol(xname) => ByRow(whichinterval) => :timetag)
-        select(:timetag, Not([:timetag, Symbol(xname)]) .=> [ByRow(x -> ismissing(x) || isnan(x))]; renamecols=false)
+        select(:timetag, Not([:timetag, Symbol(xname)]) .=> [ByRow(x -> islnan(x))]; renamecols=false)
         groupby(:timetag)
         combine(Not(:timetag) .=> mean ; renamecols=false)
         stack(Not(:timetag), :timetag; value_name = "missing rate")

@@ -1,14 +1,15 @@
 """
-`imputemean!(df)` substitute missing values with the statistical means.
+`imputemean!(df)` substitute literal `nan` values with the statistical means.
 If all missing for a column, value `999` is imputed.
 
 # Notice
 - You should be aware that `imputemean!` might does nothing without error message if the input is a view of dataframe (e.g., df[!, Not(:datetime)]).
 
+See also `islnan` for literal `nan`.
 """
 function imputemean!(df)
-    _replacenanbymissing!(df)
-    _dealwithallmissingby!(df, 999)
+    _replacenanbymissing!(df) # make all literal nan be missing
+    _dealwithallmissingby!(df, 999) # if a column is all missing, make it all 999
     Impute.substitute!(df; statistic=mean) # impute missing
     disallowmissing!(df) # sadly, disallowmissing! does not support subdataframe (e.g., df1 = @view df1[:, Not(:datetime)]; disallowmissing!(df1))
 end
@@ -28,7 +29,7 @@ end
 
 
 function _replacenanbymissing!(df)
-    select!(df, AsTable(:) => ByRow(nt -> map(x -> ((isnan(x)|ismissing(x)) ? missing : x), nt)) => AsTable ) # Also see SWCForecast.isnan
+    select!(df, AsTable(:) => ByRow(nt -> map(x -> (islnan(x) ? missing : x), nt)) => AsTable ) # Also see SWCForecast.islnan
     # Substitute NaN by missing:
     # - `df_all = ifelse.(ismissing.(df_all) .| isnan.(df_all), missing, df_all)`
     # - the first `ismissing` since `isnan(missing)` returns `missing`
@@ -42,8 +43,11 @@ function _dealwithallmissingby!(df, to_substitute)
 end
 
 
-
-isoutofrange(value, l0, l1) = (ismissing(value) || isnan(value)) ? false : (value < l0 || value > l1)
+"""
+Return `true` if `value` is out of the interval between `l0` and `l1`.
+Noted that if value is `missing`, `nothing`, or literally `nan` (see `islnan`), it returns `false` (NOT out-of-range).
+"""
+isoutofrange(value, l0, l1) = isnnm(value) ? false : (value < l0 || value > l1)
 
 function outer2missing!(df_all, colnames, limits)
     l0, l1 = limits
@@ -52,7 +56,12 @@ function outer2missing!(df_all, colnames, limits)
 end
 
 
+"""
+`removeunreasonables!(df_all)` convert all column-name specific unreasonable values to `missing`. Noted that `missing`, `nothing` and literal `nan` is not "unreasonable values".
 
+Noted that `removeunreasonables!` will NOT deal with literally Not-a-Number value nor raising an error for any literally Not-a-Number value.
+See `isoutofrange`, `islnan`.
+"""
 function removeunreasonables!(df_all)
     colnames = names(df_all, r"soil_water_content")
     limits = (0, 100)

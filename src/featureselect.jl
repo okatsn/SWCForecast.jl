@@ -8,6 +8,71 @@ function excludekey!(expr::AbstractString,inputfeaturenames::Vector)
 end
 
 
+
+
+
+"""
+# NOT EXPORTED YET
+
+Given a vector of strings, `selectbytimeshift(namesX, tpast)` returns a vector of `Bool` indicating the elements in `namesX` matching either `["t\$t" for t in tpast]` (e.g., `["t-1", "t-5", ....]`).
+
+
+"""
+function selectbytimeshift(namesX, tpast)
+    broadoccur(t,fset) = occursin.(Regex("t$t"), fset)
+    # [ for (idtpast, bitv) in enumerate()]
+    bitvs = broadoccur.(tpast, [namesX])
+    [any(getindex.(bitvs, i)) for i in eachindex(first(bitvs))]
+end
+
+fmttsuffix(t) = Regex("t$t\\Z")
+
+"""
+Given a vector `tpast` of integers, `iseithertpast(featname, tpast)` returns `true` if the string matches either `["t\$t" for t in tpast]` (e.g., `["t-1", "t-5", ....]`).
+"""
+iseithertpast(featname, tpast::Vector{<:Integer}) = any(occursin.(fmttsuffix.(tpast), string(featname)))
+
+"""
+Given a vector `tpast` of integers, `tpastfeatsele(tpast)` returns a `FeatureSelector` that keep columns where `iseithertpast(columnname, tpast)` returns `true`.
+"""
+tpastfeatsele(tpast) = FeatureSelector(features = str -> iseithertpast(str, tpast))
+
+
+
+"""
+`featselemach(fullX::DataFrame, selector::FeatureSelector)`
+returns a machine `mss` ready to be applied as `Xs = MLJ.transform(mss, X0)`
+"""
+function featselemach(fullX::DataFrame, selector::FeatureSelector)
+    mss = machine(selector, fullX)
+    fit!(mss)
+    return mss
+end
+
+"""
+`featselemach(fullX::DataFrame, tpast::Vector{<:Integer})`
+"""
+function featselemach(fullX::DataFrame, tpast)
+    selector = tpastfeatsele(tpast)
+    mss = featselemach(fullX, selector)
+    return mss
+end
+
+"""
+`tpastfeatsele(fullX::DataFrame, tpast::Vector{<:Integer})` returns the `DataFrame` selected by machine with `tpastfeatsele(tpast)` selector.
+"""
+function tpastfeatsele(fullX, tpast)
+    mss = featselemach(fullX, tpast)
+    return MLJ.transform(mss, fullX)
+end
+
+
+
+
+
+
+
+
 """
 Given feature names of the original table (before time shifted), `featureselectbyheadkey(Xtrain, featsets0)` returns the table where only variables with column name matches `headkey_set` in `featsets0` are preserved.
 Noted that `headkey` in `headkey_set` must be the first keyword of the column name.

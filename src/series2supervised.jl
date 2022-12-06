@@ -50,7 +50,8 @@ X1,y1 = series2supervised(
     )
 ```
 # NOTICE!
-The input DataFrame (`df`) must have complete rows; that is, the corresponding time tag (it might be `df.datetime` for example) must be consecutive because `df` is converted to `Matrix` and shifted using `lag`.
+- The input DataFrame (`df`) must have complete rows; that is, the corresponding time tag (it might be `df.datetime` for example) must be consecutive because `df` is converted to `Matrix` and shifted using `lag`.
+- This function filter the dataframe using `completecases`.
 
 # References:
 - https://machinelearningmastery.com/convert-time-series-supervised-learning-problem-python/

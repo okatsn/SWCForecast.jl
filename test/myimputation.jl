@@ -1,5 +1,6 @@
 using DataFrames
 using Statistics
+
 df0 = DataFrame(
     :one_missing => [1.0,2.0,3.0,missing,5.0, 6.0],
     :most_general => [1.0,missing,3.0,NaN,5.0, 6.0],

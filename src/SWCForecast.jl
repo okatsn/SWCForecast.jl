@@ -10,6 +10,10 @@ using DecisionTree: DecisionTree
 using RecipesBase
 using NetworkLayout
 
+
+include("regexselect.jl")
+export namesx
+
 include("project_setup.jl")
 export AFile, AFolder
 
@@ -35,21 +39,8 @@ include("utils/dataframe.jl")
 export narrow_types!, convert_types
 
 using DataFrames
-include("dataframetools.jl")
-export convertdf2!
-export checkparse
-export reducetype!
-export reducetype
-export describeinstr
-export isnan
-export selectnames, selectname
-export get1var
-export chknnm
-
-
-using DataFrames
 include("featureselect.jl")
-export featureselectbyheadkey, excludekey!
+export featureselectbyheadkey, excludekey!, tpastfeatsele, iseithertpast
 
 using Gadfly
 include("gadflytools.jl")
@@ -109,6 +100,7 @@ export copysections
 export expr_defaultmdname, defaultmdname
 
 using Impute
+using DataFrameTools
 include("myimputation/myimpute.jl")
 export imputemean!, imputeinterp!, removeunreasonables!
 
@@ -157,12 +149,6 @@ include("movingaverage.jl")
 export mvmean, mvnanmean, slowmvnanmean
 
 
-using PlotUtils: optimize_ticks
-using CairoMakie, Dates
-include("makietools.jl")
-export datetimeticks!, datetime2epochs, blankaxis!, getxylimits, expandylim!, shrinkylim!
-export secondyaxis
-
 using ShiftedArrays
 include("series2supervised.jl")
 export series2supervised, diffsstable!, gettshiftval
@@ -172,5 +158,8 @@ include("dataprocessing/precipitation.jl")
 export addcol_accumulation!, cccount
 
 
+using MLJ, Test
+include("learningcurves.jl")
+export learningcurves, LearningCurves
 
 end
