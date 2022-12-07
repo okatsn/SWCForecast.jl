@@ -53,6 +53,7 @@ function outer2missing!(df_all, colnames, limits)
     l0, l1 = limits
     df = df_all[!,colnames]
     df_all[!,colnames] = ifelse.(isoutofrange.(df, l0, l1), missing, df)
+    df_all
 end
 
 
