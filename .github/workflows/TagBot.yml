@@ -1,9 +1,10 @@
-# CHECKPOINT: Trying To fix TagBot
-# - [Use PAT as token](https://github.com/JuliaRegistries/TagBot#personal-access-tokens-pats)
-# - This script seems not yet correctly being set up. See [Setup](https://github.com/JuliaRegistries/TagBot#setup).
-# - It seems TagBot should work on branch "release" pushed.
-# - You should take how your SWCForecast packages organized into consideration for decide on when TagBot should work.
-
+# CHECKPOINT: Trying customizing your changelog
+# See https://github.com/JuliaRegistries/TagBot#changelogs
+# where
+# - [The default template](https://github.com/JuliaRegistries/TagBot/blob/master/action.yml)
+# - Seems like you have to provide the customized variable (e.g., `custom`) via [PkgDev](https://github.com/JuliaLang/PkgDev.jl) or [Registrator](https://github.com/JuliaRegistries/Registrator.jl/#release-notes).
+#     - search for "TagBot" in the links above to see how to set/give variables that your template can use
+#     - which implies you have to use PkgDev (which is immature) or Registrator (which I cannot see how to register to a local registry) in order to have a customized changelog
 
 name: TagBot
 
