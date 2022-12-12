@@ -33,6 +33,11 @@ Given a vector `tpast` of integers, `iseithertpast(featname, tpast)` returns `tr
 iseithertpast(featname, tpast::Vector{<:Integer}) = any(occursin.(fmttsuffix.(tpast), string(featname)))
 
 """
+` tpast::OrdinalRange` is OK.
+"""
+iseithertpast(featname, tpast::OrdinalRange) = iseithertpast(featname, collect(tpast))
+
+"""
 Given a vector `tpast` of integers, `tpastfeatsele(tpast)` returns a `FeatureSelector` that keep columns where `iseithertpast(columnname, tpast)` returns `true`.
 """
 tpastfeatsele(tpast) = FeatureSelector(features = str -> iseithertpast(str, tpast))
