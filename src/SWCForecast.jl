@@ -161,5 +161,8 @@ export addcol_accumulation!, cccount
 using MLJ, Test
 include("learningcurves.jl")
 export learningcurves, LearningCurves
+include("namedmach.jl")
+export NamedMachine,fit!, report
+
 
 end
