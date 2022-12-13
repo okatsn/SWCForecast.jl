@@ -2,11 +2,7 @@
 CurrentModule = SWCForecast
 ```
 
-!!! note 
-    If error occurred in this page, try the followings in your local machine:
-    ```julia
-    makedocs(root=joinpath(dirname(pathof(SWCForecast)), "..", "docs"), sitename="TEMP")
-    ```
+
 # Functions by topics
 ## Name-sensitive functions
 
