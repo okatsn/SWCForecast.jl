@@ -86,7 +86,7 @@ include("print2string.jl")
 export print2string
 
 include("namesensitive/format_time_tag.jl")
-export format_time_tag, split_time_tag
+export format_time_tag, split_time_tag, parselag
 
 using Markdown, FileTools
 include("collectresult.jl")

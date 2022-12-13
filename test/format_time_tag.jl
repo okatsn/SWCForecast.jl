@@ -7,4 +7,9 @@
     @test format_time_tag(["t+1"]) == "t_i, i=1"
     @test format_time_tag(["t1"]) == "t_i, i=1"
     @test format_time_tag(["t-1", "t-2", "t-3", "t-4"]) == "t_i, i=-4,-3,...,-1"
+
+    @test parselag("hello_t01_whatever_t-2") == -2
+    @test parselag("hello_t01_whatever_t209") == 209
+    @test_throws ErrorException parselag("hello_t01_whatever")
+    @test_throws ErrorException parselag("hello_t-1_whatever")
 end

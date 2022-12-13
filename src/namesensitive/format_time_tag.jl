@@ -70,3 +70,13 @@ function split_time_tag(strvec::Vector{<:AbstractString})
     end
     return v1, v2
 end
+
+
+"""
+Given a string such as `str = a_certain_variable_name_t-3`, `parselag(str)` returns the  `-3`.
+"""
+function parselag(str)
+    strv = split_time_tag(string(str))
+    ttag = match(r"(?<=\At)-?\d+",strv[end]).match
+    parse(Int, ttag)
+end
