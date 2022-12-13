@@ -162,7 +162,7 @@ using MLJ, Test
 include("learningcurves.jl")
 export learningcurves, LearningCurves
 include("namedmach.jl")
-export NamedMachine,fit!, report
+export NamedMachine,fit!, report, fitted_params
 
 
 end
