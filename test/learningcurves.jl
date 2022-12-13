@@ -72,7 +72,7 @@ using Random
             Random.seed!(1) # You should also set `rng` in `learning_curve.(machines, ...)`
             ev = evaluate!(mach; resampling = resampler, measure=mae)
             mae_t = ev.measurement |> only
-            @test isapprox(mae_l, mae_t)# test if the two mae are similar. They won't be identical since Random is applied in each training.
+            @test isapprox(mae_l, mae_t; atol=0.01)# test if the two mae are similar. They won't be identical since Random is applied in each training.
         end
     end
 end
