@@ -11,7 +11,7 @@ using RecipesBase
 using NetworkLayout
 
 
-include("regexselect.jl")
+include("namesensitive/regexselect.jl")
 export namesx
 
 include("project_setup.jl")
@@ -39,7 +39,7 @@ include("utils/dataframe.jl")
 export narrow_types!, convert_types
 
 using DataFrames
-include("featureselect.jl")
+include("namesensitive/featureselect.jl")
 export featureselectbyheadkey, excludekey!, tpastfeatsele, iseithertpast
 
 using Gadfly
@@ -85,8 +85,8 @@ export mkresultdir
 include("print2string.jl")
 export print2string
 
-include("format_time_tag.jl")
-export format_time_tag
+include("namesensitive/format_time_tag.jl")
+export format_time_tag, split_time_tag
 
 using Markdown, FileTools
 include("collectresult.jl")
