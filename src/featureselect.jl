@@ -50,7 +50,7 @@ returns a machine `mss` ready to be applied as `Xs = MLJ.transform(mss, X0)`
 """
 function featselemach(fullX::DataFrame, selector::FeatureSelector)
     mss = machine(selector, fullX)
-    fit!(mss)
+    fit!(mss; verbosity=0)
     return mss
 end
 

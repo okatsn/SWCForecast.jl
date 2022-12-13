@@ -3,8 +3,8 @@ mutable struct NamedMachine
     machine
 end
 
-function SWCForecast.fit!(nm::NamedMachine)
-    fit!(nm.machine)
+function SWCForecast.fit!(nm::NamedMachine;kwargs...)
+    fit!(nm.machine;kwargs...)
 end
 
 function SWCForecast.report(nm::NamedMachine)
