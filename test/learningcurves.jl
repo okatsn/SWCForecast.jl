@@ -15,7 +15,7 @@ using Random
 
         return mypipe
     end
-    resampler = CV(;nfolds=6);
+    resampler = CV(;nfolds=3);
     rangex = 1:9
     rangey = 1:3
     ynames = ["y$i" for i in rangey]

@@ -16,6 +16,7 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "Name-sensitive Functions" => "namesensitive.md",
         "Change log" => "log/index.md"
     ],
 )

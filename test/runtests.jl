@@ -19,7 +19,7 @@ end
 
 (testfiles, allnames) = targetlist(r"^(?!runtests).*(\.jl)$", "./");
 # pwd() here should be "./test/"
-@testset "SWCForcast" begin
+@testset "SWCForecast" begin
     for f in testfiles
         # write test in the file of the same name.
         # E.g., `test/mycode.jl` for testing `src/mycode.jl`.
@@ -27,6 +27,11 @@ end
     end
 end
 
+using Documenter
+@testset "DocTests" begin
+    DocMeta.setdocmeta!(SWCForecast, :DocTestSetup, :(using SWCForecast); recursive=true)
+    doctest(SWCForecast; manual = false)
+end
 
 # @testitem "test vscode testitem" begin
 #     println("Only `@testitem` block will be detectable by vscode's test")
