@@ -1,4 +1,4 @@
-
+expr_ttag = r"(?<=\At)-?\d+"
 """
 `format_time_tag` format time tag into LaTeX maths.
 
@@ -45,6 +45,8 @@ julia> split_time_tag("Soil_water_content_10cm_t-24")
 """
 function split_time_tag(str::AbstractString)
     v = rsplit(str, "_";limit=2)
+    ttag = v[end]
+    @assert occursin(expr_ttag, ttag) "The last one ($ttag in $str) is not time tag (didn't match $(expr_ttag))"
     return (v...,)
 end
 
@@ -77,6 +79,6 @@ Given a string such as `str = a_certain_variable_name_t-3`, `parselag(str)` retu
 """
 function parselag(str)
     strv = split_time_tag(string(str))
-    ttag = match(r"(?<=\At)-?\d+",strv[end]).match
+    ttag = match(expr_ttag,strv[end]).match
     parse(Int, ttag)
 end

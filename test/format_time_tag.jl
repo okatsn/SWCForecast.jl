@@ -10,6 +10,8 @@
 
     @test parselag("hello_t01_whatever_t-2") == -2
     @test parselag("hello_t01_whatever_t209") == 209
-    @test_throws ErrorException parselag("hello_t01_whatever")
-    @test_throws ErrorException parselag("hello_t-1_whatever")
+    @test split_time_tag("hello_t01_whatever_t209")[1] == "hello_t01_whatever"
+    @test_throws AssertionError split_time_tag("hello_t01_whatever")
+    @test_throws AssertionError parselag("hello_t-1_whatever")
+    @test_throws AssertionError parselag("hello_t01_whatever")
 end
