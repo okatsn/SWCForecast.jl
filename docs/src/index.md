@@ -1,7 +1,10 @@
 ```@meta
 CurrentModule = SWCForecast
 ```
-
+```@contents
+Pages = ["namesensitive.md"]
+Depth = 5
+```
 # SWCForecast
 
 Documentation for [SWCForecast](https://github.com/okatsn/SWCForecast.jl).
@@ -13,11 +16,4 @@ Documentation for [SWCForecast](https://github.com/okatsn/SWCForecast.jl).
 # Beware that @autodoc at different locations conflicts to each other (warning will be shown).
 Order   = [:function, :type]
 ```
-## Miscellaneous functions
-These are functions under `SWCForecast/src/`
-```@autodocs
-Modules = [SWCForecast]
-Order   = [:function, :type]
-using FileTools, SWCForecast
-Pages = filelist(r".+\.jl", joinpath(dirname(pathof(SWCForecast))); join=false)
-```
+
