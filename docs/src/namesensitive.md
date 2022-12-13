@@ -1,11 +1,5 @@
 # Name-sensitive functions
 
-```@example
-using FileTools, SWCForecast
-flist = filelist(r".+\.jl", joinpath(dirname(pathof(SWCForecast)),"namesensitive"); join=false)
-show(flist[2])
-```
-
 !!! note 
     If error occurred in this page, try the followings in your local machine:
     ```julia
@@ -16,6 +10,5 @@ show(flist[2])
 Modules = [SWCForecast]
 Order   = [:function, :type]
 using FileTools, SWCForecast
-flist = filelist(r".+\.jl", joinpath(dirname(pathof(SWCForecast)),"namesensitive"); join=false)
-Pages = flist
+Pages = filelist(r".+\.jl", joinpath(dirname(pathof(SWCForecast)),"namesensitive"); join=false)
 ```
