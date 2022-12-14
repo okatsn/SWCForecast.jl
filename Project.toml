@@ -1,7 +1,7 @@
 name = "SWCForecast"
 uuid = "ab5b03c2-6ccc-4282-bdb8-07112b9001f0"
 authors = ["okatsn <okatsn@gmail.com> and contributors"]
-version = "0.1.2"
+version = "0.1.3"
 
 [deps]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
