@@ -50,6 +50,10 @@ function split_time_tag(str::AbstractString)
     return (v...,)
 end
 
+function split_time_tag(symb::Symbol)
+    split_time_tag(string(symb))
+end
+
 # function split_time_tag(strvec::Vector{<:AbstractString})
 #     lenv = length(strvec)
 #     v1 = Vector{String}(undef, lenv)
