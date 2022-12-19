@@ -59,7 +59,7 @@ include("quickplots/multibands.jl")
 export symmquantile, quantileband!
 
 
-using Colors, Gadfly
+using Colors, Gadfly, Plots
 include("quickplots/mycolors.jl")
 export mycolorsd_1, mycolor_gadfly_default, mycolor_plots_default, mycolor_tab10, mycolor_plots_palette, mycolor_makie_palette
 export mycolormap_whitelajolla
