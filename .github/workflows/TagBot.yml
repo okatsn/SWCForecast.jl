@@ -1,27 +1,14 @@
-# CHECKPOINT: Trying customizing your changelog
-# See https://github.com/JuliaRegistries/TagBot#changelogs
-# where
-# - [The default template](https://github.com/JuliaRegistries/TagBot/blob/master/action.yml)
-# - Seems like you have to provide the customized variable (e.g., `custom`) via [PkgDev](https://github.com/JuliaLang/PkgDev.jl) or [Registrator](https://github.com/JuliaRegistries/Registrator.jl/#release-notes).
-#     - search for "TagBot" in the links above to see how to set/give variables that your template can use
-#     - which implies you have to use PkgDev (which is immature) or Registrator (which I cannot see how to register to a local registry) in order to have a customized changelog
-
+# Modified from the [Default TagBot template in PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl/blob/master/templates/github/workflows/TagBot.yml)
+# Trigger TagBot only if
 name: TagBot
 
 on:
-  push:
-    paths:
-      - '/docs/src/log/index.md'
-    branches:
-      - main
-      - master
-
+  repository_dispatch:
+    types: [trigger-tagbot]
   issue_comment:
     types:
       - created
-  # see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issue_comment
   workflow_dispatch:
-  # see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
 jobs:
   TagBot:
     # if: github.event_name == 'workflow_dispatch' || github.actor == 'JuliaTagBot'
@@ -30,8 +17,5 @@ jobs:
       - uses: JuliaRegistries/TagBot@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          registry: okatsn/OkRegistry # for custom registry
-          # If your registry is public, this is all you need to do.
-          # For more information, see [here](https://github.com/JuliaRegistries/TagBot#custom-registries)
-
-
+          ssh: ${{ secrets.DOCUMENTER_KEY }}
+          registry: okatsn/OkRegistry

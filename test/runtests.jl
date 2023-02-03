@@ -19,7 +19,7 @@ end
 
 (testfiles, allnames) = targetlist(r"^(?!runtests).*(\.jl)$", "./");
 # pwd() here should be "./test/"
-@testset "SWCForecast" begin
+@testset "SWCForecast.jl" begin
     for f in testfiles
         # write test in the file of the same name.
         # E.g., `test/mycode.jl` for testing `src/mycode.jl`.
@@ -30,9 +30,18 @@ end
 using Documenter
 @testset "DocTests" begin
     DocMeta.setdocmeta!(SWCForecast, :DocTestSetup, :(using SWCForecast); recursive=true)
-    doctest(SWCForecast; manual = false)
+    # using the package everywhere in the doc
+    # See also https://documenter.juliadocs.org/stable/man/doctests/#Setup-Code
+
+
+    doctest(SWCForecast; manual = false) # this makes jldoctest also be tested in a local test
 end
 
+using CompatHelperLocal
+@testset "CompatHelperLocal" begin
+    @test true
+    TF = CompatHelperLocal.@check() # This raise warning only.
+end
 # @testitem "test vscode testitem" begin
 #     println("Only `@testitem` block will be detectable by vscode's test")
 #     @test true

@@ -1,3 +1,7 @@
+# You have to set PAT and add secrete ACCESS_OKREGISTRY in the repo {{{PKG}}}
+# https://stevenmortimer.com/running-github-actions-sequentially/
+# see also the default template: https://github.com/JuliaCI/PkgTemplates.jl/blob/master/templates/github/workflows/register.yml
+
 name: CI
 on:
   push:
@@ -38,10 +42,6 @@ jobs:
       - uses: codecov/codecov-action@v2
         with:
           files: lcov.info
-      # # ERROR will occur
-      # - uses: julia-actions/julia-uploadcoveralls@v1
-      #   env:
-      #     COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
   docs:
     name: Documentation
     runs-on: ubuntu-latest
@@ -53,9 +53,6 @@ jobs:
         with:
           version: '1'
       - uses: okatsn/add-registry@v1
-        with:
-          author-name: 'okatsn/OkRegistry'
-
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-docdeploy@v1
         env:

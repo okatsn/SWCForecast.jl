@@ -30,6 +30,7 @@ MLJEnsembles = "50ed68f4-41fd-4504-931a-ed422449fee0"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 NetworkLayout = "46757867-2c16-5918-afeb-47bfcb05e46a"
 OffsetArrays = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
+OkPkgTemplates = "38290ba8-8fbe-457b-bf75-0e4980da3840"
 OutlierDetection = "262411bb-c475-4342-ba9e-03b8c0183ca6"
 PlotUtils = "995b91a9-d308-5afd-9ec6-746e21dbc043"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
@@ -68,7 +69,9 @@ ShiftedArrays = "2.0.0"
 julia = "1.6"
 
 [extras]
+CompatHelperLocal = "5224ae11-6099-4aaa-941d-3aab004bd678"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["Test", "Documenter", "CompatHelperLocal"]
