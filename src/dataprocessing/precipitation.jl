@@ -1,5 +1,5 @@
 """
-Add columns that are derived by accumulating corresponding7 variables.
+Add columns that are derived by accumulating corresponding variables.
 
 # Example
 ```julia
@@ -30,6 +30,7 @@ function addcol_accumulation!(df, all_precipstr, apd)
     else
         @warn "apd is empty."
     end
+    return df
 end
 
 """
